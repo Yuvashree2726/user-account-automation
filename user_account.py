@@ -5,7 +5,7 @@ from pathlib import Path
 
 cwd = Path.cwd()
 
-with open(cwd / "users_in.csv", "r") as file_input, open(cwd / "users_out.csv", "w") as file_output:
+with open(cwd / "user_in.csv", "r") as file_input, open(cwd / "user_out.csv", "w") as file_output:
     reader = csv.DictReader(file_input)
     writer = csv.DictWriter(file_output, fieldnames=reader.fieldnames)
     writer.writeheader()
@@ -19,7 +19,8 @@ with open(cwd / "users_in.csv", "r") as file_input, open(cwd / "users_out.csv", 
                        "-p", user["password"],
                        user["username"]]
         try:
-            subprocess.run(useradd_cmd, check=True)
+            #subprocess.run(useradd_cmd, check=True)
+            print(f"User creation command: {useradd_cmd}")
         except subprocess.CalledProcessError as e:
             print(f"Error creating user {user['username']}: {e}")
         
